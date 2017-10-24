@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="tab切换 原生js" />
+    <meta charset="utf-8">
+    <title>tab 切换</title>
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style:none;
+        }
+
+        .mod-tab{
+            width:600px;
+            margin: 0 auto;
+        }
+
+        .tabs{
+            display:flex;
+            border:1px solid #ccc;
+        }
+
+        .tabs li{
+            width:200px;
+            text-align:center;
+            cursor:pointer;
+        }
+
+        .wrap{
+            width:600px;
+            height:200px;
+            border:1px solid #ccc;
+            border-top:none;
+            overflow:hidden;
+        }
+
+        .panels{
+            width:1800px;
+            height:200px;
+            position:relative;
+        }
+
+        .wrap:after{
+            content:'';
+            display:block;
+            clear:both;
+        }
+
+        .panels li{
+            width:600px;
+            height:200px;
+            float:left;
+        }
+
+        .panels li:nth-child(1){
+            background-color:red;
+        }
+        .panels li:nth-child(2){
+            background-color:yellow;
+        }
+        .panels li:nth-child(3){
+            background-color:orange;
+        }
+        .active{
+            background:#ccc;
+            color:#fff;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="mod-tab">
+    <ul class="tabs">
+        <li class="active">tab1</li>
+        <li>tab2</li>
+        <li>tab3</li>
+    </ul>
+    <div class="wrap">
+        <ul class="panels">
+            <li>content 1</li>
+            <li>content 2</li>
+            <li>content 3</li>
+        </ul>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $('.tabs>li').on('click', function(){
+        var $this = $(this)
+        var index = $this.index()
+        var panelWidth = $('.mod-tab .wrap').width()
+        console.log(index)
+        $this.addClass('active').siblings().removeClass('active')
+        $this.parents('.mod-tab').find('.panels')
+           .animate({right: panelWidth*index})
+
+    })
+
+
+
+</script>
+</body>
+</html>
